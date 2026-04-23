@@ -16,7 +16,7 @@ from supabase import Client, create_client
 from agent.models import TradeSignal
 from ingestion.rag.config import RAGSettings
 from ingestion.rag.indexing import build_embed_model, build_vector_store
-from py_core import extract, get_logger
+from core import extract, get_logger
 
 logger = get_logger("agent.tools")
 

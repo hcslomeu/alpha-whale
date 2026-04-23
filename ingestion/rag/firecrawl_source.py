@@ -9,7 +9,7 @@ from urllib.parse import urlparse
 from firecrawl import FirecrawlApp  # type: ignore[import-untyped]
 
 from ingestion.rag.config import RAGSettings
-from py_core.logging import get_logger
+from core.logging import get_logger
 
 logger = get_logger("firecrawl")
 

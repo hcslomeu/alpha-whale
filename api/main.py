@@ -9,7 +9,7 @@ from fastapi.middleware.cors import CORSMiddleware
 
 from api.config import APISettings
 from ingestion.supabase_client import create_supabase_client
-from py_core import AsyncRedisClient, get_logger, instrument_fastapi_app
+from core import AsyncRedisClient, get_logger, instrument_fastapi_app
 
 load_dotenv()
 

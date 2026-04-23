@@ -18,7 +18,7 @@ from ingestion.rag.config import RAGSettings
 from ingestion.rag.edgar import EdgarClient, EdgarFiling, FilingType
 from ingestion.rag.firecrawl_source import FirecrawlNewsSource, NewsArticle
 from ingestion.rag.indexing import index_nodes
-from py_core import get_logger
+from core import get_logger
 
 logger = get_logger("rag.pipeline")
 

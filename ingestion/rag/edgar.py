@@ -13,8 +13,8 @@ from typing import Any
 from bs4 import BeautifulSoup, Tag
 from pydantic import BaseModel
 
-from py_core.async_utils import AsyncHTTPClient
-from py_core.logging import get_logger
+from core.async_utils import AsyncHTTPClient
+from core.logging import get_logger
 
 logger = get_logger("edgar")
 

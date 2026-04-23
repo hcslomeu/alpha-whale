@@ -7,7 +7,7 @@ from langgraph.graph.state import CompiledStateGraph
 from supabase import AsyncClient
 
 from api.config import APISettings
-from py_core import AsyncRedisClient
+from core import AsyncRedisClient
 
 
 def get_supabase(request: Request) -> AsyncClient:

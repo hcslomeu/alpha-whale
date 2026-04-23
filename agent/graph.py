@@ -31,7 +31,7 @@ from agent.tools import (
     get_technical_indicators,
     query_knowledge_base,
 )
-from py_core import ExtractionError, extract, get_logfire_instance, get_logger
+from core import ExtractionError, extract, get_logfire_instance, get_logger
 
 logger = get_logger("agent.graph")
 
@@ -168,7 +168,7 @@ def get_model() -> Runnable:
                 sync_client.ping()
                 set_llm_cache(RedisCache(redis_=sync_client))
             except Exception:
-                from py_core import get_logger
+                from core import get_logger
 
                 get_logger("agent").warning("llm_cache_init_failed", reason="Redis unavailable")
 

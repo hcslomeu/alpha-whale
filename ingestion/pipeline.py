@@ -13,8 +13,8 @@ from ingestion.config import IngestionSettings
 from ingestion.massive import MassiveClient
 from ingestion.schemas import IndicatorRow, IndicatorValue, MACDValue
 from ingestion.stochastic import compute_stochastic
-from py_core.async_utils import AsyncHTTPClient
-from py_core.logging import get_logger
+from core.async_utils import AsyncHTTPClient
+from core.logging import get_logger
 
 logger = get_logger("ingestion.pipeline")
 

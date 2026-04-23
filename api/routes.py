@@ -22,7 +22,7 @@ from api.models import (
     IndicatorDataResponse,
     MarketDataResponse,
 )
-from py_core import get_logfire_instance, get_logger
+from core import get_logfire_instance, get_logger
 
 logger = get_logger("api.routes")
 

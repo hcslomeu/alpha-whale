@@ -242,7 +242,7 @@ class TestToolsNode:
         self, mock_extract: MagicMock, _mock_logger: MagicMock
     ):
         """Trade signal extraction failure surfaces as a tool error, not a neutral signal."""
-        from py_core import ExtractionError
+        from core import ExtractionError
 
         mock_extract.side_effect = ExtractionError("fail")
         tool_call = {
