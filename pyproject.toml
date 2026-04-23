@@ -1,0 +1,99 @@
+[project]
+name = "alpha-whale"
+version = "0.1.0"
+description = "AI-powered finance agent — LangGraph, LlamaIndex, Pinecone, FastAPI"
+readme = "README.md"
+requires-python = ">=3.12"
+license = { text = "MIT" }
+authors = [{ name = "Humberto Lomeu", email = "hcslomeu@gmail.com" }]
+dependencies = [
+    # Core utilities
+    "pydantic>=2.0",
+    "pydantic-settings>=2.0",
+    "structlog>=24.0",
+    "httpx>=0.28",
+    "tenacity>=9.0",
+    "redis>=5.0",
+    "openai>=1.0",
+    "python-dotenv>=1.0",
+    "beautifulsoup4>=4.12",
+    # Web API
+    "fastapi>=0.115,<1.0",
+    "uvicorn[standard]>=0.34",
+    "sse-starlette>=2.0",
+    # Agent
+    "langchain-core>=0.3",
+    "langchain-openai>=0.3",
+    "langchain-community>=0.3",
+    "langgraph>=1.0",
+    "langsmith>=0.7",
+    "instructor>=1.0",
+    # Persistence
+    "supabase>=2.0",
+    # RAG (LlamaIndex + Pinecone + Cohere + Firecrawl)
+    "llama-index-core>=0.14",
+    "llama-index-vector-stores-pinecone>=0.8",
+    "llama-index-embeddings-openai>=0.6",
+    "llama-index-postprocessor-cohere-rerank>=0.8",
+    "llama-index-retrievers-bm25>=0.5",
+    "llama-index-readers-web>=0.6",
+    "firecrawl-py>=4.20",
+    "cohere>=5.20",
+    # Observability
+    "logfire>=3.0",
+]
+
+[dependency-groups]
+dev = [
+    "pytest>=8.0",
+    "pytest-cov>=4.1",
+    "pytest-asyncio>=0.23",
+    "ruff>=0.4",
+    "mypy>=1.10",
+    "types-requests>=2.32",
+    "fakeredis>=2.26",
+]
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[tool.hatch.build.targets.wheel]
+packages = ["agent", "api", "core", "ingestion"]
+
+[tool.ruff]
+target-version = "py312"
+line-length = 100
+src = ["."]
+
+[tool.ruff.lint]
+select = [
+    "E",
+    "W",
+    "F",
+    "I",
+    "B",
+    "C4",
+    "UP",
+]
+ignore = [
+    "E501",
+    "UP047",
+]
+
+[tool.ruff.lint.isort]
+known-first-party = ["agent", "api", "core", "ingestion"]
+
+[tool.mypy]
+python_version = "3.12"
+warn_return_any = true
+warn_unused_ignores = true
+disallow_untyped_defs = true
+exclude = ["tests/", "build/", "dist/"]
+plugins = ["pydantic.mypy"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests", "api/tests"]
+python_files = ["test_*.py"]
+python_functions = ["test_*"]
+asyncio_mode = "auto"
