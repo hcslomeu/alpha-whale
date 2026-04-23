@@ -412,7 +412,7 @@ def run(user_input: str, *, thread_id: str = "default") -> str:
         "configurable": {"thread_id": thread_id},
     }
     result = app.invoke(
-        {"messages": [HumanMessage(content=user_input)]},  # type: ignore[call-overload]
+        {"messages": [HumanMessage(content=user_input)]},
         config=config,
     )
     return str(result["messages"][-1].content)

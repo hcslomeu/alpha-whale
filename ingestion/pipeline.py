@@ -8,13 +8,13 @@ from decimal import Decimal
 
 from supabase import AsyncClient
 
+from core.async_utils import AsyncHTTPClient
+from core.logging import get_logger
 from ingestion.bronze import upsert_indicators, upsert_market_data
 from ingestion.config import IngestionSettings
 from ingestion.massive import MassiveClient
 from ingestion.schemas import IndicatorRow, IndicatorValue, MACDValue
 from ingestion.stochastic import compute_stochastic
-from core.async_utils import AsyncHTTPClient
-from core.logging import get_logger
 
 logger = get_logger("ingestion.pipeline")
 

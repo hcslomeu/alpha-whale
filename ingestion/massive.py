@@ -6,8 +6,8 @@ import asyncio
 from datetime import UTC, date, datetime
 from decimal import Decimal
 
-from ingestion.schemas import IndicatorValue, MACDValue, OHLCVBar
 from core.async_utils import AsyncHTTPClient
+from ingestion.schemas import IndicatorValue, MACDValue, OHLCVBar
 
 
 def _ts_to_date(ms: int) -> date:

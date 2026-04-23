@@ -13,12 +13,12 @@ from dataclasses import dataclass, field
 from llama_index.core import VectorStoreIndex
 from llama_index.core.schema import TextNode
 
+from core import get_logger
 from ingestion.rag.chunking import chunk_articles, chunk_filings
 from ingestion.rag.config import RAGSettings
 from ingestion.rag.edgar import EdgarClient, EdgarFiling, FilingType
 from ingestion.rag.firecrawl_source import FirecrawlNewsSource, NewsArticle
 from ingestion.rag.indexing import index_nodes
-from core import get_logger
 
 logger = get_logger("rag.pipeline")
 

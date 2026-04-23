@@ -8,8 +8,8 @@ from urllib.parse import urlparse
 
 from firecrawl import FirecrawlApp  # type: ignore[import-untyped]
 
-from ingestion.rag.config import RAGSettings
 from core.logging import get_logger
+from ingestion.rag.config import RAGSettings
 
 logger = get_logger("firecrawl")
 

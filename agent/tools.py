@@ -14,9 +14,9 @@ from llama_index.postprocessor.cohere_rerank import CohereRerank
 from supabase import Client, create_client
 
 from agent.models import TradeSignal
+from core import extract, get_logger
 from ingestion.rag.config import RAGSettings
 from ingestion.rag.indexing import build_embed_model, build_vector_store
-from core import extract, get_logger
 
 logger = get_logger("agent.tools")
 

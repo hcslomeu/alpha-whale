@@ -161,7 +161,11 @@ async def _stream_agent(
     async def _post_stream(span: Any | None) -> tuple[list[SSEEvent], bool]:
         state = await graph.aget_state(config)
         interrupted_task = next(
-            (task for task in (state.tasks or []) if hasattr(task, "interrupts") and task.interrupts),
+            (
+                task
+                for task in (state.tasks or [])
+                if hasattr(task, "interrupts") and task.interrupts
+            ),
             None,
         )
         if interrupted_task is None:
