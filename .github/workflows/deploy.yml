@@ -1,0 +1,58 @@
+name: Deploy
+
+on:
+  workflow_run:
+    workflows: [CI]
+    branches: [main]
+    types: [completed]
+  workflow_dispatch:
+
+concurrency:
+  group: deploy-prod
+  cancel-in-progress: false
+
+jobs:
+  deploy:
+    if: github.event_name == 'workflow_dispatch' || github.event.workflow_run.conclusion == 'success'
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Configure SSH
+        uses: webfactory/ssh-agent@v0.9.0
+        with:
+          ssh-private-key: ${{ secrets.LIGHTSAIL_SSH_KEY }}
+
+      - name: Add Lightsail to known_hosts
+        env:
+          HOST: ${{ secrets.LIGHTSAIL_HOST }}
+        run: ssh-keyscan -H "$HOST" >> ~/.ssh/known_hosts
+
+      - name: Deploy over SSH
+        env:
+          HOST: ${{ secrets.LIGHTSAIL_HOST }}
+        run: |
+          ssh "ubuntu@$HOST" <<'REMOTE'
+            set -euo pipefail
+            cd /opt/alpha-whale
+            git fetch --all
+            git reset --hard origin/main
+            docker compose up -d --build
+            sleep 10
+            docker compose ps
+          REMOTE
+
+      - name: Healthcheck
+        env:
+          HOST: ${{ secrets.LIGHTSAIL_HOST }}
+        run: |
+          for i in 1 2 3 4 5; do
+            if curl -fsS "http://$HOST/health"; then
+              echo "healthy"
+              exit 0
+            fi
+            sleep 5
+          done
+          echo "unhealthy after retries"
+          exit 1
